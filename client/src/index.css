@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+
+.MuiButtonBase-root 
+.MuiToggleButton-root .MuiToggleButton-sizeMedium 
+.MuiToggleButton-primary 
+.MuiToggleButtonGroup-grouped 
+.MuiToggleButtonGroup-groupedHorizontal 
+.css-1b74zvs-MuiButtonBase-root-MuiToggleButton-root{
+    color: white;
+}
