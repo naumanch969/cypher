@@ -1,23 +1,21 @@
-// Function to convert a letter to a number (A=0, B=1, ..., Z=25)
+// Right now, it is not integrated to frontend
+
 const letterToNumber = (letter: string): number => letter.charCodeAt(0) - 'A'.charCodeAt(0);
-
-// Function to convert a number to a letter (0=A, 1=B, ..., 25=Z)
 const numberToLetter = (number: number): string => String.fromCharCode((number + 26) % 26 + 'A'.charCodeAt(0));
+const determinant2x2 = (matrix: number[][]): number => matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 
-// Function to calculate the modular inverse of a number
 const modInverse = (a: number, m: number): number | null => {
   for (let i = 1; i < m; i++) {
     if ((a * i) % m === 1) {
       return i;
     }
   }
-  return null; // No modular inverse exists
+  return null; 
 };
 
-// Function to calculate the determinant of a 2x2 matrix
-const determinant2x2 = (matrix: number[][]): number => matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 
-// Function to calculate the inverse of a 2x2 matrix (mod 26)
+
+
 const inverse2x2 = (matrix: number[][]): number[][] | null => {
   const det = determinant2x2(matrix);
   const invDet = modInverse(det, 26);
@@ -29,10 +27,10 @@ const inverse2x2 = (matrix: number[][]): number[][] | null => {
     ];
   }
 
-  return null; // No inverse exists
+  return null; 
 };
 
-// Function to encrypt using Hill Cipher
+
 export const encryptHillCipher = (plaintext: string, keyMatrix: number[][]): string => {
   const n = keyMatrix.length;
   const plaintextBlocks: string[] = [];
@@ -51,7 +49,7 @@ export const encryptHillCipher = (plaintext: string, keyMatrix: number[][]): str
   return ciphertextBlocks.join('');
 };
 
-// Function to decrypt using Hill Cipher
+
 export const decryptHillCipher = (ciphertext: string, keyMatrix: number[][]): string | null => {
   const n = keyMatrix.length;
   const keyMatrixInverse = inverse2x2(keyMatrix);
@@ -77,19 +75,13 @@ export const decryptHillCipher = (ciphertext: string, keyMatrix: number[][]): st
   return plaintextBlocks.join('');
 };
 
-// Example key matrix (2x2)
+
 const keyMatrix: number[][] = [
   [6, 24],
   [13, 16],
 ];
-
-// Example plaintext
 const plaintext: string = 'HELLO';
-
-// Encryption
 const ciphertext: string = encryptHillCipher(plaintext, keyMatrix);
 console.log('Ciphertext:', ciphertext);
-
-// Decryption
 const decryptedText: string | null = decryptHillCipher(ciphertext, keyMatrix);
 console.log('Decrypted Text:', decryptedText);

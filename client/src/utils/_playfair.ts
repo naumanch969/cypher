@@ -1,23 +1,20 @@
+// Right now, it is not integrated to frontend
 export const createPlayfairKeySquare = (key: string): string[][] => {
-  const alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; // 'J' is usually combined with 'I'
+  const alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
   const keySquare: string[][] = [];
-
-  // Fill the key square with unique letters from the key
   for (let char of key.toUpperCase()) {
-    if (char === "J") char = "I"; // Replace 'J' with 'I'
+    if (char === "J") char = "I";
     if (!keySquare.flat().includes(char) && alphabet.includes(char)) {
       keySquare.push([char]);
     }
   }
 
-  // Fill the remaining cells with the remaining alphabet letters
   for (let char of alphabet) {
     if (!keySquare.flat().includes(char)) {
       keySquare.push([char]);
     }
   }
 
-  // Convert the flat array into a 5x5 matrix
   return [
     keySquare.slice(0, 5).flat(),
     keySquare.slice(5, 10).flat(),
@@ -121,14 +118,11 @@ const findPosition = (
   throw new Error(`Letter not found in key square: ${letter}`);
 };
 
-// Example usage
 const plaintext = "HELLO";
 const key = "KEYWORD";
 
-// Encryption
 const ciphertext = encryptPlayfair(plaintext, key);
 console.log("Ciphertext:", ciphertext);
 
-// Decryption
 const decryptedText = decryptPlayfair(ciphertext, key);
 console.log("Decrypted Text:", decryptedText);
